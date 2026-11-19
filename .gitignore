@@ -9,3 +9,4 @@ supabase/.branches/
 tests/e2e/results.json
 __pycache__/
 tests/last-backup-check.txt
+dist/
