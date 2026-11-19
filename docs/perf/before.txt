@@ -1,0 +1,15 @@
+                 label                 | median_ms | max_ms | runs 
+ cost report, one project              |      85.2 |   86.6 |    7
+ portfolio cost, 30 projects           |    2425.1 | 2531.5 |    3
+ cash requirement, 90 days             |    1442.8 | 1537.0 |    7
+ unit readiness, 70 units              |      86.9 |   99.6 |    7
+ approvals waiting for MD              |      26.8 |   34.9 |    7
+ unread notifications                  |       3.7 |    5.0 |    7
+ open defects, one project             |      10.7 |   12.0 |    7
+ latest site reports                   |      24.9 |   34.6 |    7
+ PM approvals queue                    |      63.4 |   69.1 |    7
+ audit trail page, one project         |      42.6 |   51.6 |    7
+ latest purchase orders (all projects) |     363.9 |  380.4 |    7
+ payables: approved unpaid invoices    |      52.7 |   59.4 |    7
+ order tracking (no prices)            |     121.3 |  124.1 |    7
+ exception scan (scheduler)            |     769.6 |  781.9 |    3

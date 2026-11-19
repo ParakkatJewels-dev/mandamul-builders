@@ -1,0 +1,11 @@
+{
+  "rewrites": [{ "source": "/((?!env.json|app.js|app.css|app.js.map).*)", "destination": "/index.html" }],
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" },
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" } ] },
+    { "source": "/env.json", "headers": [{ "key": "Cache-Control", "value": "no-store" }] }
+  ]
+}

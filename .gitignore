@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.vercel/
+supabase/.temp/
+supabase/.branches/
+*.dump
+tests/e2e/results.json
+__pycache__/
+tests/last-backup-check.txt

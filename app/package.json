@@ -1,0 +1,13 @@
+{
+  "name": "mandamul-app",
+  "private": true,
+  "description": "M Andamul Development OS — production web application (React + TypeScript, Supabase via RPC)",
+  "scripts": {
+    "build": "bun run build.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "bun test tests/unit",
+    "dev": "bun run build.ts && bun run dev/gateway.ts"
+  },
+  "dependencies": { "react": "19.2.8", "react-dom": "19.2.8" },
+  "devDependencies": { "typescript": "6.0.3" }
+}

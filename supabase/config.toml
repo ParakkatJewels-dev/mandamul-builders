@@ -1,0 +1,42 @@
+# Supabase CLI configuration for local development (`supabase start`, `supabase db reset`).
+# On the hosted project, set the same values in the dashboard (see docs/DEPLOYMENT.md).
+# Not verified here: the Supabase CLI was not available in the build environment.
+project_id = "mandamul-devos"
+
+[api]
+enabled = true
+port = 54321
+# `api` holds every write (security-definer functions with permission checks); `public` is read-only through RLS.
+schemas = ["api", "public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17   # the hosted staging project runs PostgreSQL 17 (all local tests ran on 16)
+
+[db.seed]
+enabled = false   # no fabricated data in a real database; demo data lives only in the app prototype
+
+[auth]
+enabled = true
+site_url = "https://mandamul-os.vercel.app"
+additional_redirect_urls = ["https://mandamul-os*.vercel.app", "http://localhost:8790"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+enable_signup = false          # users are invited by an administrator
+
+[auth.mfa]
+max_enrolled_factors = 10
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = true
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"

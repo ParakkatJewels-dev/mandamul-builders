@@ -1,0 +1,302 @@
+[
+ {
+  "workflow": "A Sign-in",
+  "name": "a wrong password is refused with a message",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "A Sign-in",
+  "name": "the project manager signs in and sees the screens their role allows",
+  "ok": true,
+  "detail": "['Command center', 'Action center', 'Approvals', 'Procurement', 'Site reports', 'Contracts', 'Cost report', 'Warranty', 'Feasibility']"
+ },
+ {
+  "workflow": "A Sign-in",
+  "name": "the session starts at password level (MFA not yet verified)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "A Sign-in",
+  "name": "the project list holds only the projects the user is a member of",
+  "ok": true,
+  "detail": "['Kovalam Boutique Hotel', 'Phase 3 controls test', 'Thekkady Glamping Test', 'Vembanad Lake Resort (SYNTHETIC TEST DATA)']"
+ },
+ {
+  "workflow": "B Command center",
+  "name": "one row per visible project, figures from the database",
+  "ok": true,
+  "detail": "4 rows"
+ },
+ {
+  "workflow": "B Command center",
+  "name": "active-project count matches the database",
+  "ok": true,
+  "detail": "ACTIVE PROJECTS 4 3 with overdue activities"
+ },
+ {
+  "workflow": "C Procurement",
+  "name": "a material request raised in the app is saved in the database",
+  "ok": true,
+  "detail": "MR-26-0015 Material request raised"
+ },
+ {
+  "workflow": "C Procurement",
+  "name": "the new request is listed with status Submitted",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "C Procurement",
+  "name": "two quotations saved exactly as typed (₹2,450 and ₹2,610.50)",
+  "ok": true,
+  "detail": "2450.00,2610.50"
+ },
+ {
+  "workflow": "C Procurement",
+  "name": "ordering from a vendor that is not the lowest needs a reason first",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "C Procurement",
+  "name": "the purchase order is raised and sent for approval; total = 40 × ₹2,450 + 18% GST = ₹1,15,640.00",
+  "ok": true,
+  "detail": "PO-26-0016 115640.00 Purchase order raised and sent for approval"
+ },
+ {
+  "workflow": "D Approvals",
+  "name": "the order appears in the approver's inbox with amount and route",
+  "ok": true,
+  "detail": "pm"
+ },
+ {
+  "workflow": "D Approvals",
+  "name": "approving on a password-only session asks for the authenticator code (database refuses without MFA)",
+  "ok": true,
+  "detail": "PO-26-0016: approved"
+ },
+ {
+  "workflow": "D Approvals",
+  "name": "after the code the approval goes through and the session is MFA-verified",
+  "ok": true,
+  "detail": "PO-26-0016: approved"
+ },
+ {
+  "workflow": "D Approvals",
+  "name": "the decision is in the audit log",
+  "ok": true,
+  "detail": "6"
+ },
+ {
+  "workflow": "E Receipt",
+  "name": "a partial delivery of 25 is recorded with its accepted value (25 × 2,450 × 1.18 = ₹72,275.00)",
+  "ok": true,
+  "detail": "25.000|Pass|72275.00 Receipt recorded; stock and actual cost updated"
+ },
+ {
+  "workflow": "E Receipt",
+  "name": "the order becomes Part received",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "E Receipt",
+  "name": "receiving more than was ordered is refused and explained",
+  "ok": true,
+  "detail": "over-receipt: 40.000 ordered, 25.000 already accepted"
+ },
+ {
+  "workflow": "F Site",
+  "name": "a site supervisor has no command center or cost report in the menu",
+  "ok": true,
+  "detail": "['Action center', 'Procurement', 'Site reports', 'Contracts', 'Warranty']"
+ },
+ {
+  "workflow": "F Site",
+  "name": "the daily report is saved as Submitted with labour and work lines",
+  "ok": true,
+  "detail": "DR-26-0004|Submitted Report submitted; the project manager verifies it before progress moves"
+ },
+ {
+  "workflow": "F Site",
+  "name": "task progress does not move until the report is verified",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "F Site",
+  "name": "a duplicate report for the same day is refused with a clear message",
+  "ok": true,
+  "detail": "a report for 2026-11-19 is already submitted for this site"
+ },
+ {
+  "workflow": "F Site",
+  "name": "opening the cost report by address shows that it is not part of the role",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "F Site",
+  "name": "and the database refuses the cost report to a site supervisor even when called directly (403)",
+  "ok": true,
+  "detail": "403 {\"code\":\"42501\",\"message\":\"permission denied: view on budget\",\"details\":null,\"hi"
+ },
+ {
+  "workflow": "F Site",
+  "name": "the PM verifies the report; the activity progress moves to the reported value",
+  "ok": true,
+  "detail": "DR-26-0004: approved"
+ },
+ {
+  "workflow": "G Action center",
+  "name": "alerts show severity, owner, urgency, records and next action",
+  "ok": true,
+  "detail": "9 alerts"
+ },
+ {
+  "workflow": "G Action center",
+  "name": "actions appear only on alerts the person may act on; the rest say who acts (B28)",
+  "ok": true,
+  "detail": "0 actionable, 9 for information"
+ },
+ {
+  "workflow": "G Action center",
+  "name": "the owner acknowledges an alert; saved with who did it",
+  "ok": true,
+  "detail": "Building permit & statutory approvals is 55 days late · Acknowledged — the alert stays until its cause clears"
+ },
+ {
+  "workflow": "G Action center",
+  "name": "resolving needs a written note (button disabled until 5 characters)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "H Cost report",
+  "name": "the cost report shows the receipt as actual cost on code 06, same as the database",
+  "ok": true,
+  "detail": "72275.00"
+ },
+ {
+  "workflow": "H Cost report",
+  "name": "totals add up exactly in the footer (computed in whole paise)",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "J Feasibility",
+  "name": "a study typed with Indian digit grouping is saved and the database model shows ₹44.85 Cr investment, 13.24% ROI, 7.6-year payback",
+  "ok": true,
+  "detail": "TOTAL INVESTMENT ₹44.85 Cr ₹1.87 Cr per key STABILISED REVENUE ₹13.20 Cr ADR ₹18,000 · 62% occupancy EBITDA ₹5.94 Cr 45% margin ROI 13.24% EBITDA ÷ in"
+ },
+ {
+  "workflow": "J Feasibility",
+  "name": "scenarios, sensitivity and assumptions are shown, and regulatory data is marked as an estimate",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "K Warranty",
+  "name": "a warranty claim raised in the app is saved with its in-warranty status and response clock",
+  "ok": true,
+  "detail": "WC-26-0003|true Claim raised; the response clock has started"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "a site supervisor sees the contract quantities but no rates",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the site supervisor records 120 sqm; it waits for verification",
+  "ok": true,
+  "detail": "1e8cd62c-44f8-4153-9f38-8636b04d1d98|Recorded Measurement recorded; an engineer verifies it before it can be billed"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the person who measured is not offered verification",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the project manager verifies the measurement",
+  "ok": true,
+  "detail": "Measurement verified"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the contractor signs in to a contracts-only view",
+  "ok": true,
+  "detail": "['Action center', 'Contracts']"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the contractor sees only their own contracts",
+  "ok": true,
+  "detail": "1"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the claim starts at the verified, unbilled 120 and is submitted at the contract rate (₹84,000.00)",
+  "ok": true,
+  "detail": "120 CL-26-0005|Submitted|84000.00 Claim submitted; it is checked against verified measurements and contract rates"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the claim matches the verified measurement, so a running bill is prepared and sent for certification",
+  "ok": true,
+  "detail": "Billed|RA-26-0007 84000.00|84840.00|In approval"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the bill is certified by the engineer, the QS and finance in turn (finance with the authenticator)",
+  "ok": true,
+  "detail": "pm:approved > qs:approved > finance:approved"
+ },
+ {
+  "workflow": "M Payments",
+  "name": "the certified bill appears in the payment queue with its exact net payable",
+  "ok": true,
+  "detail": "84840.00"
+ },
+ {
+  "workflow": "M Payments",
+  "name": "finance pays the full net payable with the bill's TDS and a bank reference; the bill is marked Paid",
+  "ok": true,
+  "detail": "84840.00|1680.00 Payment recorded against RA-26-0007"
+ },
+ {
+  "workflow": "M Payments",
+  "name": "paying more than the balance is flagged on screen and refused by the database",
+  "ok": true,
+  "detail": "overpayment: net payable 272700.00, 0 already paid"
+ },
+ {
+  "workflow": "L Contracts",
+  "name": "the contract list shows the new certified and paid amounts",
+  "ok": true,
+  "detail": "WO-26-0001 RCC frame works — villas\tWestern Ghats Builders\t₹12,50,000.00\t₹7,14,000.00\t₹4,48,440.00\t—\tActive"
+ },
+ {
+  "workflow": "I Interface",
+  "name": "dark mode can be chosen and is remembered",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "I Interface",
+  "name": "on a 390 px phone the screen has no sideways scrolling and a menu button",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "workflow": "I Interface",
+  "name": "no JavaScript errors during the run",
+  "ok": true,
+  "detail": "[]"
+ }
+]

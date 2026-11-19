@@ -1,0 +1,133 @@
+ login 
+-------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ login 
+-------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ login 
+-------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ login 
+-------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ login 
+-------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+ login 
+-------
+ 
+(1 row)
+
+ set_config 
+------------
+ none
+(1 row)
+
+ set_config 
+------------
+ 
+(1 row)
+
+ t 
+---
+ 
+(1 row)
+
+                 label                 | median_ms | max_ms | runs 
+---------------------------------------+-----------+--------+------
+ cost report, one project              |      11.2 |   12.2 |    7
+ portfolio cost, 30 projects           |     198.8 |  201.3 |    3
+ cash requirement, 90 days             |      11.4 |   14.1 |    7
+ unit readiness, 70 units              |       4.8 |    5.2 |    7
+ approvals waiting for MD              |       3.9 |    4.5 |    7
+ unread notifications                  |       9.1 |    9.7 |    7
+ unread notifications, app query form  |       0.1 |    0.1 |    7
+ open defects, one project             |       1.0 |    1.6 |    7
+ latest site reports                   |       1.0 |    1.0 |    7
+ PM approvals queue                    |       2.8 |    3.0 |    7
+ audit trail page, one project         |       2.4 |    6.2 |    7
+ latest purchase orders (all projects) |       1.7 |    1.7 |    7
+ payables: approved unpaid invoices    |       1.1 |    1.3 |    7
+ order tracking (no prices)            |       2.0 |    2.2 |    7
+ exception scan (scheduler)            |     737.2 |  746.0 |    3
+

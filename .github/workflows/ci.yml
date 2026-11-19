@@ -1,0 +1,68 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+
+jobs:
+  database:
+    name: Database migrations and workflow tests
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGPASSWORD: postgres
+    steps:
+      - uses: actions/checkout@v4
+      - name: Postgres 16 client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-16
+          echo "/usr/lib/postgresql/16/bin" >> "$GITHUB_PATH"
+      - name: Apply migrations, run 12 workflows + negative cases, verify backup/restore
+        run: ./scripts/db-test.sh
+
+  app-e2e:
+    name: Prototype end-to-end (browser)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install playwright==1.48.0 && python -m playwright install --with-deps chromium
+      - run: python tests/e2e/app_workflows.py app-prototype
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: e2e-results, path: tests/e2e/results.json }
+
+  production-app:
+    name: Production app (unit tests, type check, build, browser tests on the real database)
+    runs-on: ubuntu-24.04
+    needs: database
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env: { PGHOST: localhost, PGPORT: "5432", PGPASSWORD: postgres }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client-16
+          pip install playwright==1.48.0 && python -m playwright install --with-deps chromium
+      - run: cd app && bun install && bunx tsc -p tsconfig.json
+      - run: ./scripts/db-test.sh && ./scripts/app-e2e.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: production-app-results, path: app/tests/e2e/results.json }
